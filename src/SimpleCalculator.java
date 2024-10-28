@@ -11,6 +11,19 @@ public class SimpleCalculator {
         return a - b;
     }
 
+    // Method untuk perkalian
+    public static double multiply(double a, double b) {
+        return a * b;
+    }
+
+    // Method untuk pembagian
+    public static double divide(double a, double b) {
+        if (b == 0) {
+            throw new ArithmeticException("Pembagian dengan nol tidak diperbolehkan");
+        }
+        return a / b;
+    }
+
     // Method untuk menerima input
     public static double[] getNumbers(Scanner scanner) {
         double[] numbers = new double[2];
@@ -28,6 +41,10 @@ public class SimpleCalculator {
                 return add(num1, num2);
             case "-":
                 return subtract(num1, num2);
+            case "*":
+                return multiply(num1, num2);
+            case "/":
+                return divide(num1, num2);
             default:
                 throw new IllegalArgumentException("Operasi tidak valid: " + operation);
         }
@@ -43,14 +60,14 @@ public class SimpleCalculator {
         double[] numbers = getNumbers(scanner);
 
         // Mengambil input operasi
-        System.out.print("Masukkan operasi (+ atau -): ");
+        System.out.print("Masukkan operasi (+, -, *, atau /): ");
         String operation = scanner.next();
 
         // Menghitung hasil
         try {
             double result = calculate(numbers[0], numbers[1], operation);
             System.out.println("Hasil: " + result);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | ArithmeticException e) {
             System.out.println(e.getMessage());
         }
 
